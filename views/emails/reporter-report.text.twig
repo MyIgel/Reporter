@@ -1,0 +1,23 @@
+{% block content %}
+System: {{ url('/') }}
+By: {% if is_user() %}{{ user.name }} - {{ url('/users', {"action":"view","user_id":user.id}) }}{% else %}-{% endif %}
+About: {{ referer }}{% if about_user %} - about {{ about_user.name }} {{ url('/users', {"action":"view","user_id":about_user.id}) }}{% endif %}
+{% if content %}
+Content: {{ content }}
+{% endif %}
+{% if reason %}
+Reason: {{ reason }}
+{% endif %}
+{% if message %}
+Message:
+{{ message }}
+{% endif %}
+{% endblock %}
+
+{{ '-- ' }}
+{% block footer %}
+    {{ config('name') }}
+    {%- if day_of_event is not null -%}
+        {% if config('name') %}, {% endif %}{{ __('event.day', [day_of_event]) }}
+    {%- endif %}
+{% endblock %}

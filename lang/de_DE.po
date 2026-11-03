@@ -1,0 +1,55 @@
+msgid "reporter.report"
+msgstr "Inhalt melden"
+
+msgid "reporter.mail.abuse"
+msgstr "Abuse Meldung"
+
+msgid "reporter.mail.technical"
+msgstr "Fehlermeldung"
+
+msgid "reporter.success"
+msgstr "Die Meldung wurde erfolgreich verschickt"
+
+msgid "reporter.failed"
+msgstr "Leider konnte die Meldung nicht verschickt werden"
+
+msgid "reporter.type.abuse"
+msgstr "Abuse - Rechtlich problematischer Inhalt"
+
+msgid "reporter.type.content"
+msgstr "Inhalt - Der Inhalt ist problematisch"
+
+msgid "reporter.type.person"
+msgstr "Person - Es geht um Probleme mit Benutzer*innen"
+
+msgid "reporter.type.technical"
+msgstr "Technisches Problem - Ein technisches Problem mit der Seite"
+
+msgid "reporter.type.other"
+msgstr "Sonstiges - Alles andere"
+
+msgid "reporter.form.reason"
+msgstr "Kategorie"
+
+msgid "reporter.form.reason.info"
+msgstr "Die Kategorie welche am besten zu deinem Problem passt. Sie entscheidet mit, wer die Meldung bekommt."
+
+msgid "reporter.form.message"
+msgstr "Meldung"
+
+msgid "reporter.form.message.info"
+msgstr ""
+"Beschreibe das Problem welches du melden möchtest und wenn du möchtest "
+"alles was uns helfen könnte das Problem zu beheben, auch wenn es offensichtlich erscheint. "
+"Du kannst uns auch gerne kurze Stichpunkte schreiben."
+
+msgid "reporter.form.content"
+msgstr "Technische Information"
+
+msgid "reporter.form.use_content"
+msgstr "Soll obige technische Information teil deiner Meldung sein?"
+
+msgid "reporter.form.info"
+msgstr ""
+"Deine Meldung wird von den zuständigen Engeln gelesen und verarbeitet, "
+"wir werden deine persönlichen Daten sicher und vertraulich zur Bearbeitung der Meldung behandeln."

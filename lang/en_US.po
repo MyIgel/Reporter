@@ -1,0 +1,55 @@
+msgid "reporter.report"
+msgstr "Report content"
+
+msgid "reporter.mail.abuse"
+msgstr "Abuse report"
+
+msgid "reporter.mail.technical"
+msgstr "Technical issue"
+
+msgid "reporter.success"
+msgstr "Report send successfully"
+
+msgid "reporter.failed"
+msgstr "Unable to send report"
+
+msgid "reporter.type.abuse"
+msgstr "Abuse - Legally problematic content"
+
+msgid "reporter.type.content"
+msgstr "Content - Problematic content"
+
+msgid "reporter.type.person"
+msgstr "Person - There is a problem with a person"
+
+msgid "reporter.type.technical"
+msgstr "Technical Issue - A problem with the site"
+
+msgid "reporter.type.other"
+msgstr "Other - Something else"
+
+msgid "reporter.form.reason"
+msgstr "Category"
+
+msgid "reporter.form.reason.info"
+msgstr "The category that best fits your request. It is a factor in who will receive the report."
+
+msgid "reporter.form.message"
+msgstr "Report"
+
+msgid "reporter.form.message.info"
+msgstr ""
+"Describe the problem that you want to report and if you want "
+"anything that might help us resolve the issue, even if it seems obvious. "
+"Feel free to use bullet points to keep it short and precise."
+
+msgid "reporter.form.content"
+msgstr "Technical information"
+
+msgid "reporter.form.use_content"
+msgstr "Should the above technical information be send with your request?"
+
+msgid "reporter.form.info"
+msgstr ""
+"Your report will be read and processed by the responsible angels, "
+"we will only use your personal data to securely and confidentially handle your request."

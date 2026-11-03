@@ -1,0 +1,17 @@
+{% extends "layouts/parts/navbar.twig" %}
+
+{# TODO #}
+
+{% block user_menu %}
+    {% if can('report.send') %}
+        {{ _self.toolbar_item(
+            '',
+            '#report',
+            '',
+            'shield-fill-exclamation',
+            __('reporter.report')
+        ) }}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

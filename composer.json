@@ -1,0 +1,48 @@
+{
+  "type": "engelsystem-plugin",
+  "name": "engelsystem/reporter",
+  "description": "Adds abuse management capabilities such as reporting content to the Engelsystem",
+  "version": "0.0.1",
+  "license": "LGPL-2.0-or-later",
+  "homepage": "https://engelsystem.de",
+  "authors": [
+    {
+      "name": "Igel",
+      "email": "whattayasay@myigel.name"
+    }
+  ],
+  "extra": {
+    "event_handlers": {
+      "metrics": "Engelsystem\\Reporter\\Reporter@metrics"
+    },
+    "config_options": {
+      "event": {
+        "config": {
+          "reporter_abuse_report_email": {
+            "type": "email"
+          },
+          "reporter_technical_report_email": {
+            "type": "email"
+          }
+        }
+      },
+      "system": {
+        "config": {
+          "abuse_messages": {
+            "type": "static",
+            "hidden": true,
+            "default": 0
+          }
+        }
+      }
+    },
+    "routes": {
+      "/report/send": ["Engelsystem\\Reporter\\Controller@send", "POST"]
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Engelsystem\\Reporter\\": "src/"
+    }
+  }
+}

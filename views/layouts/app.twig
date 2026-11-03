@@ -1,0 +1,37 @@
+{% extends "layouts/app.twig" %}
+
+{# TODO #}
+
+{% block head -%}
+    {{ parent() }}
+    <!-- TODO: Types -->
+    <meta name="report-data" content="{{ {
+        'report': __('reporter.report'),
+        'reason': __('reporter.form.reason'),
+        'types': [
+            __('reporter.type.abuse'),
+            __('reporter.type.content'),
+            __('reporter.type.person'),
+            __('reporter.type.technical'),
+            __('reporter.type.other'),
+        ],
+        'rason_info': __('reporter.form.reason.info'),
+        'message': __('reporter.form.message'),
+        'message_info': __('reporter.form.message.info'),
+        'content': __('reporter.form.content'),
+        'content_use': __('reporter.form.use_content'),
+        'info': __('reporter.form.info'),
+        'target': url('/report/send'),
+    }|json_encode()|escape('html_attr') }}" />
+{% endblock %}
+
+{% block scripts -%}
+    {{ parent() }}
+    <script src="{{ asset('plugin:Reporter:assets/report.js') }}" defer></script>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <!-- TODO: Remove -->
+    <a class="btn btn-danger" data-report_info="some info" href="#report">Report</a>
+{% endblock %}
