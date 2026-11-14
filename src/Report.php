@@ -6,6 +6,7 @@ use Engelsystem\Config\Config;
 use Engelsystem\Events\DataEvent;
 use Engelsystem\Mail\EngelsystemMailer;
 use Engelsystem\Models\EventConfig;
+use Engelsystem\Renderer\Renderer;
 use Psr\Log\LoggerInterface;
 
 class Report
@@ -14,6 +15,7 @@ class Report
         protected LoggerInterface $log,
         protected EngelsystemMailer $mailer,
         protected Config $config,
+        protected Renderer $renderer,
     ) {
     }
 
@@ -56,6 +58,17 @@ class Report
                 'help' => 'Number of abuse messages sent',
                 $this->config->get('reporter_abuse_messages', 0),
             ],
+        ];
+    }
+
+    public function userPageName(DataEvent $event): void
+    {
+        $event->data['parts'] = [
+            ...$event->data['parts'],
+            'report' => $this->renderer->render(
+                'reporter/report.twig',
+                ['report_data' => ['user' => $event->data['user']->id]]
+            ),
         ];
     }
 }

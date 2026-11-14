@@ -61,7 +61,8 @@ class Reporter {
     this.contentInput.value = report_info;
     this.contentInput.parentElement.classList.remove('d-none');
     this.contentUseCheckbox.parentElement.classList.remove('d-none');
-    if (!report_info) {
+    if (!report_info || report_info === 'null') {
+      this.contentInput.value = '';
       this.contentInput.parentElement.classList.add('d-none');
       this.contentUseCheckbox.parentElement.classList.add('d-none');
     }
@@ -143,6 +144,6 @@ class Reporter {
 window.addEventListener('DOMContentLoaded', () => {
   new Reporter(
     document.getElementById('report'),
-    document.querySelectorAll('a[href="#report"], [data-report_info]')
+    document.querySelectorAll('[data-report_info]')
   );
 });

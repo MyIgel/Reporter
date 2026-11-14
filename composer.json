@@ -13,7 +13,8 @@
   ],
   "extra": {
     "event_handlers": {
-      "metrics": "Engelsystem\\Reporter\\Report@metrics"
+      "metrics": "Engelsystem\\Reporter\\Report@metrics",
+      "user_page_name": "Engelsystem\\Reporter\\Report@userPageName"
     },
     "config_options": {
       "event": {

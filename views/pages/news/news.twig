@@ -1,18 +1,17 @@
 {% extends 'pages/news/news.twig' %}
-{% import 'macros/base.twig' as m %}
-{% import 'macros/form.twig' as f %}
+{% import 'reporter/report.twig' as r %}
 
 {% block comment_mod %}
-    {% if can('report.send') and config('reporter_reasons') %}
-        <button
-            class="btn btn-sm btn-warning me-1"
-            data-report_info="{{ {"comment": comment.text, "at": comment.created_at, "id": comment.id, "user": comment.user.id}|json_encode()|escape('html_attr') }}"
-            title="{{ __('reporter.report') }}"
-        >
-            {{ m.icon('shield-fill-exclamation') }}
-        </button>
+    {% if is_guest() or comment.user.id != user.id %}
+
+        {{ r.report({
+            'comment': comment.text,
+            'at': comment.created_at,
+            'id': comment.id,
+            'user': comment.user.id,
+        }, {'class': 'me-1'}) }}
+
     {% endif %}
 
     {{ parent() }}
-
 {% endblock %}

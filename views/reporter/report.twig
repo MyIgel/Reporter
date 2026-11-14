@@ -1,0 +1,31 @@
+{#
+Renders a report button
+
+@param {dictionary} report_info - Additional report information
+@param {dictionary} [opt] - Additional options for the button.
+@param {string} [opt.label] - Optional label for the button
+#}
+{% macro report(report_info, opt) %}
+    {% if can('report.send') and config('reporter_reasons') %}
+        {% block report_button %}
+
+            {# For $reasons the import must be at the same scope where its used #}
+            {% import 'macros/form.twig' as f %}
+            {{ f.button(
+                opt.label|default(''),
+                {
+                    'btn_type': 'warning',
+                    'size': 'sm',
+                    'title': __('reporter.report'),
+                    'icon_left': 'shield-fill-exclamation',
+                    'attr': {'data-report_info': report_info|default(null)|json_encode()},
+                }|merge(opt|default({}))
+            ) }}
+
+        {% endblock %}
+    {% endif %}
+{% endmacro %}
+
+{% block report %}
+    {{ _self.report(report_data|default({})) }}
+{% endblock %}

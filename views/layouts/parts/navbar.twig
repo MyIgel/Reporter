@@ -1,16 +1,9 @@
 {% extends "layouts/parts/navbar.twig" %}
+{% import 'reporter/report.twig' as r %}
 
 {% block user_menu %}
-    {% if can('report.send') and config('reporter_reasons') %}
-        {{ _self.toolbar_item(
-            '',
-            '#report',
-            '',
-            'shield-fill-exclamation',
-            __('reporter.report'),
-            'text-warning',
-        ) }}
-    {% endif %}
+
+    {{ r.report(null, {'size': '', 'btn_type': 'text', 'class': 'text-warning'}) }}
 
     {{ parent() }}
 {% endblock %}
