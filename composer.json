@@ -13,7 +13,7 @@
   ],
   "extra": {
     "event_handlers": {
-      "metrics": "Engelsystem\\Reporter\\Reporter@metrics"
+      "metrics": "Engelsystem\\Reporter\\Report@metrics"
     },
     "config_options": {
       "event": {
@@ -23,12 +23,29 @@
           },
           "reporter_technical_report_email": {
             "type": "email"
+          },
+          "reporter_reasons": {
+            "type": "select_multi",
+            "data": {
+              "abuse": "reporter.type.abuse",
+              "content": "reporter.type.content",
+              "person": "reporter.type.person",
+              "technical": "reporter.type.technical",
+              "other": "reporter.type.other"
+            },
+            "default": [
+              "abuse",
+              "content",
+              "person",
+              "technical",
+              "other"
+            ]
           }
         }
       },
       "system": {
         "config": {
-          "abuse_messages": {
+          "reporter_abuse_messages": {
             "type": "static",
             "hidden": true,
             "default": 0

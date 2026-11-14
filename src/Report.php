@@ -5,10 +5,13 @@ namespace Engelsystem\Reporter;
 use Engelsystem\Config\Config;
 use Engelsystem\Events\DataEvent;
 use Engelsystem\Mail\EngelsystemMailer;
+use Engelsystem\Models\EventConfig;
+use Psr\Log\LoggerInterface;
 
 class Report
 {
     public function __construct(
+        protected LoggerInterface $log,
         protected EngelsystemMailer $mailer,
         protected Config $config,
     ) {
@@ -16,12 +19,10 @@ class Report
 
     public function send(array $data): bool
     {
-        $isAbuse = $data['reason'] !== 'technical_issue';
+        $isAbuse = $data['reason'] !== 'technical';
         $to = $this->config->get($isAbuse ? 'reporter_abuse_report_email' : 'reporter_technical_report_email');
-        if ($isAbuse) {
-            $to = $this->config->get('technical_report_email');
-        }
         if (!$to) {
+            $this->log->error('Reporter: Unable to send {reason} email, missing recipient address', ['reason' => $data['reason']]);
             return false;
         }
 
@@ -34,10 +35,13 @@ class Report
         );
 
         if ($success) {
-            $this->config->set(
-                'abuse_messages',
-                $this->config->get('abuse_messages', 0) + 1
-            );
+            (new EventConfig())
+                ->findOrNew('reporter_abuse_messages')
+                ->setAttribute('name', 'reporter_abuse_messages')
+                ->setAttribute('value', $this->config->get('reporter_abuse_messages', 0) + 1)
+                ->save();
+        } else {
+            $this->log->error('Reporter: Unable to send {reason} email, error sending', ['reason' => $data['reason']]);
         }
 
         return $success;
@@ -47,10 +51,10 @@ class Report
     {
         $event->data['metrics'] = [
             ...$event->data['metrics'],
-            'abuse_messages' => [
+            'reporter_abuse_messages' => [
                 'type' => 'gauge',
                 'help' => 'Number of abuse messages sent',
-                $this->config->get('abuse_messages', 0),
+                $this->config->get('reporter_abuse_messages', 0),
             ],
         ];
     }

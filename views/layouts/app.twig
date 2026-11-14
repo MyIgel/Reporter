@@ -1,29 +1,6 @@
 {% extends "layouts/app.twig" %}
-
-{# TODO #}
-
-{% block head -%}
-    {{ parent() }}
-    <!-- TODO: Types -->
-    <meta name="report-data" content="{{ {
-        'report': __('reporter.report'),
-        'reason': __('reporter.form.reason'),
-        'types': [
-            __('reporter.type.abuse'),
-            __('reporter.type.content'),
-            __('reporter.type.person'),
-            __('reporter.type.technical'),
-            __('reporter.type.other'),
-        ],
-        'rason_info': __('reporter.form.reason.info'),
-        'message': __('reporter.form.message'),
-        'message_info': __('reporter.form.message.info'),
-        'content': __('reporter.form.content'),
-        'content_use': __('reporter.form.use_content'),
-        'info': __('reporter.form.info'),
-        'target': url('/report/send'),
-    }|json_encode()|escape('html_attr') }}" />
-{% endblock %}
+{% import 'macros/base.twig' as m %}
+{% import 'macros/form.twig' as f %}
 
 {% block scripts -%}
     {{ parent() }}
@@ -32,6 +9,64 @@
 
 {% block body -%}
     {{ parent() }}
-    <!-- TODO: Remove -->
-    <a class="btn btn-danger" data-report_info="some info" href="#report">Report</a>
+
+    {% if config('reporter_reasons') %}
+        <div class="modal" tabindex="-1" id="report">
+            <form method="post" action="{{ url('/report/send') }}">
+                <div class="modal-dialog">
+                    <div class="modal-content {{ m.type_bg_class() }}">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{ __('reporter.report') }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            {{ csrf() }}
+
+                            {% set reasons = {} %}
+                            {% for r in config('reporter_reasons') %}
+                                {% set reasons = reasons|merge({(r): __('reporter.type.' ~ r)}) %}
+                            {% endfor %}
+                            {{ f.select(
+                                'reason',
+                                __('reporter.form.reason'),
+                                reasons,
+                                {'required': true, 'required_icon': true, 'form_text': __('reporter.form.reason.info')},
+                            ) }}
+
+                            {{ f.textarea(
+                                'message',
+                                __('reporter.form.message'),
+                                {'form_text': __('reporter.form.message.info')},
+                            ) }}
+
+                            {{ f.textarea(
+                                'content',
+                                __('reporter.form.content'),
+                                {'disabled': true},
+                            ) }}
+
+
+                            {{ f.checkbox(
+                                'use_content',
+                                __('reporter.form.use_content'),
+                                {'checked': true},
+                            ) }}
+
+
+                            {{ f.form_text({'form_text': __('reporter.form.info')}) }}
+                        </div>
+
+                        <div class="modal-footer">
+                            {{ f.submit(__('reporter.report'), {
+                                'icon_left': 'shield-fill-exclamation',
+                                'name': 'report',
+                                'btn_type': 'danger',
+                            }) }}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -8,10 +8,10 @@ msgid "reporter.mail.technical"
 msgstr "Technical issue"
 
 msgid "reporter.success"
-msgstr "Report send successfully"
+msgstr "Report send successfully!"
 
 msgid "reporter.failed"
-msgstr "Unable to send report"
+msgstr "Unable to send report."
 
 msgid "reporter.type.abuse"
 msgstr "Abuse - Legally problematic content"
@@ -51,5 +51,16 @@ msgstr "Should the above technical information be send with your request?"
 
 msgid "reporter.form.info"
 msgstr ""
-"Your report will be read and processed by the responsible angels, "
-"we will only use your personal data to securely and confidentially handle your request."
+"Your report will be read and processed by the responsible angels. "
+"We will only use your personal data to securely and confidentially handle your request."
+
+
+msgid "config.reporter_abuse_report_email"
+msgstr "E-mail address for abuse reports"
+
+msgid "config.reporter_technical_report_email"
+msgstr "E-mail address for technical problems"
+
+msgid "config.reporter_reasons"
+msgstr "Selectable report categories"
+

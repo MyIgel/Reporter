@@ -8,10 +8,10 @@ msgid "reporter.mail.technical"
 msgstr "Fehlermeldung"
 
 msgid "reporter.success"
-msgstr "Die Meldung wurde erfolgreich verschickt"
+msgstr "Die Meldung wurde erfolgreich verschickt!"
 
 msgid "reporter.failed"
-msgstr "Leider konnte die Meldung nicht verschickt werden"
+msgstr "Leider konnte die Meldung nicht verschickt werden."
 
 msgid "reporter.type.abuse"
 msgstr "Abuse - Rechtlich problematischer Inhalt"
@@ -39,7 +39,7 @@ msgstr "Meldung"
 
 msgid "reporter.form.message.info"
 msgstr ""
-"Beschreibe das Problem welches du melden möchtest und wenn du möchtest "
+"Beschreibe das Problem welches du melden möchtest sowie, wenn du möchtest, "
 "alles was uns helfen könnte das Problem zu beheben, auch wenn es offensichtlich erscheint. "
 "Du kannst uns auch gerne kurze Stichpunkte schreiben."
 
@@ -51,5 +51,14 @@ msgstr "Soll obige technische Information teil deiner Meldung sein?"
 
 msgid "reporter.form.info"
 msgstr ""
-"Deine Meldung wird von den zuständigen Engeln gelesen und verarbeitet, "
-"wir werden deine persönlichen Daten sicher und vertraulich zur Bearbeitung der Meldung behandeln."
+"Deine Meldung wird von den zuständigen Engeln gelesen und verarbeitet. "
+"Wir werden deine persönlichen Daten sicher, vertraulich und nur zur Bearbeitung der Meldung behandeln."
+
+msgid "config.reporter_abuse_report_email"
+msgstr "E-Mail Adresse für Abuse Reports"
+
+msgid "config.reporter_technical_report_email"
+msgstr "E-Mail Adresse für Technische Probleme"
+
+msgid "config.reporter_reasons"
+msgstr "Zur Auswahl stehende Report Kategorien"
