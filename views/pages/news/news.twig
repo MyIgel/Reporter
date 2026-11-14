@@ -1,0 +1,18 @@
+{% extends 'pages/news/news.twig' %}
+{% import 'macros/base.twig' as m %}
+{% import 'macros/form.twig' as f %}
+
+{% block comment_mod %}
+    {% if can('report.send') and config('reporter_reasons') %}
+        <button
+            class="btn btn-sm btn-warning me-1"
+            data-report_info="{{ {"comment": comment.text, "at": comment.created_at, "id": comment.id, "user": comment.user.id}|json_encode()|escape('html_attr') }}"
+            title="{{ __('reporter.report') }}"
+        >
+            {{ m.icon('shield-fill-exclamation') }}
+        </button>
+    {% endif %}
+
+    {{ parent() }}
+
+{% endblock %}

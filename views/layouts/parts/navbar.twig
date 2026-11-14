@@ -1,15 +1,14 @@
 {% extends "layouts/parts/navbar.twig" %}
 
-{# TODO #}
-
 {% block user_menu %}
-    {% if can('report.send') %}
+    {% if can('report.send') and config('reporter_reasons') %}
         {{ _self.toolbar_item(
             '',
             '#report',
             '',
             'shield-fill-exclamation',
-            __('reporter.report')
+            __('reporter.report'),
+            'text-warning',
         ) }}
     {% endif %}
 

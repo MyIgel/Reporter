@@ -10,7 +10,7 @@
 {% block body -%}
     {{ parent() }}
 
-    {% if config('reporter_reasons') %}
+    {% if can('report.send') and config('reporter_reasons') %}
         <div class="modal" tabindex="-1" id="report">
             <form method="post" action="{{ url('/report/send') }}">
                 <div class="modal-dialog">
@@ -55,13 +55,14 @@
 
 
                             {{ f.form_text({'form_text': __('reporter.form.info')}) }}
+
                         </div>
 
                         <div class="modal-footer">
                             {{ f.submit(__('reporter.report'), {
                                 'icon_left': 'shield-fill-exclamation',
                                 'name': 'report',
-                                'btn_type': 'danger',
+                                'btn_type': 'warning',
                             }) }}
                         </div>
                     </div>

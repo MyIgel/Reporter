@@ -36,18 +36,23 @@ class Controller extends BaseController
     {
         $data = $this->validate($request, [
             'reason' => 'required|in:' . implode(',', $this->reasons),
-            'about_user' => 'optional|int',
             'message' => 'optional',
             'use_content' => 'optional|checked',
             'content' => 'optional',
         ]);
 
-        if (!$data['use_content']) {
+        if (!$data['use_content'] || !$data['content']) {
             $data['content'] = null;
         }
 
-        if ($data['about_user']) {
-            $data['about_user'] = User::findOrFail($data['about_user']);
+        $data['about_user'] = null;
+        if (
+            $data['content']
+            && ($content = json_decode($data['content'], true)) !== null
+            && is_array($content)
+            && array_key_exists('user', $content)
+        ) {
+            $data['about_user'] = User::findOrFail($content['user']);
         }
 
         $referer = $request->getHeader('referer');

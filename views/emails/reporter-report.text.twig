@@ -1,18 +1,19 @@
 {% block content %}
 System: {{ url('/') }}
-By: {% if is_user() %}{{ user.name }} - {{ url('/users', {"action":"view","user_id":user.id}) }}{% else %}-{% endif %}
-About: {{ referer }}{% if about_user %} - about {{ about_user.name }} {{ url('/users', {"action":"view","user_id":about_user.id}) }}{% endif %}
+By: {% if is_user() %}{{ user.name }} {{ url('/users', {"action":"view","user_id":user.id}) }}{% else %}-{% endif %}
+
+Reason: {{ reason }}
+About:
+- page: {{ referer }}
+{% if about_user %}- user: {{ about_user.name }} {{ url('/users', {"action":"view","user_id":about_user.id}) }}{% endif %}
 
 {% if content %}
-Content: {{ content }}
-{% endif %}
-
-{% if reason %}
-Reason: {{ reason }}
+Content:
+- {{ content }}
 {% endif %}
 
 {% if message %}
-Message:
+User message:
 {{ message }}
 {% endif %}
 {% endblock %}

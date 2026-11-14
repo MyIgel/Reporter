@@ -48,7 +48,11 @@ class Reporter {
       return;
     }
 
-    const element = e.target;
+    let element = e.target;
+    if (element.classList.contains('bi')) {
+      element = element.parentElement;
+    }
+
     const report_info = element.dataset.report_info ?? '';
 
     this.cleanupAlerts();
@@ -76,9 +80,11 @@ class Reporter {
       return;
     }
 
+    this.contentInput.removeAttribute('disabled');
     const data = new FormData(this.form);
+    this.contentInput.setAttribute('disabled', '');
     if (!this.contentUseCheckbox.checked) {
-      data.set('report_info', '-');
+      data.set('content', '');
     }
 
     const response = await fetch(this.form.action, {
