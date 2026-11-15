@@ -4,7 +4,7 @@
   "description": "Adds abuse management capabilities such as reporting content to the Engelsystem",
   "version": "0.0.1",
   "license": "LGPL-2.0-or-later",
-  "homepage": "https://engelsystem.de",
+  "homepage": "https://github.com/MyIgel/Reporter",
   "authors": [
     {
       "name": "Igel",
