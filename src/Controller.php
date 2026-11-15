@@ -32,6 +32,11 @@ class Controller extends BaseController
         $this->reasons = $config->get('reporter_reasons');
     }
 
+    public function form()
+    {
+        return $this->response->withView('reporter/page.twig');
+    }
+
     public function send(Request $request): Response
     {
         $data = $this->validate($request, [

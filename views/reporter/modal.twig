@@ -1,0 +1,37 @@
+{% import 'macros/base.twig' as m %}
+
+{% block modal %}
+    <div class="modal" tabindex="-1" id="report">
+        <form method="post" action="{{ url('/report/send') }}">
+            <div class="modal-dialog">
+                <div class="modal-content {{ m.type_bg_class() }}">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ __('reporter.report') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    {% use "reporter/form.twig" with form_fields as field, submit as button %}
+                    {# For $reasons the used blocks must be aliased and explicitly with 'block'ed #}
+
+                    <div class="modal-body">
+
+                        {% block field %}
+                            {{ parent() }}
+                        {% endblock %}
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        {% block button %}
+                            {{ parent() }}
+                        {% endblock %}
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

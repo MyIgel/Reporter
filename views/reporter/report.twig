@@ -10,15 +10,16 @@ Renders a report button
         {% block report_button %}
 
             {# For $reasons the import must be at the same scope where its used #}
-            {% import 'macros/form.twig' as f %}
-            {{ f.button(
+            {% import 'macros/base.twig' as m %}
+            {{ m.button(
                 opt.label|default(''),
+                url('/report'),
                 {
-                    'btn_type': 'warning',
+                    'type': 'warning',
                     'size': 'sm',
                     'title': __('reporter.report'),
                     'icon_left': 'shield-fill-exclamation',
-                    'attr': {'data-report_info': report_info|default(null)|json_encode()},
+                    'data': {'report_info': report_info|default(null)|json_encode()},
                 }|merge(opt|default({}))
             ) }}
 

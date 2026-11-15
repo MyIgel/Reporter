@@ -11,63 +11,6 @@
     {{ parent() }}
 
     {% if can('report.send') and config('reporter_reasons') %}
-        <div class="modal" tabindex="-1" id="report">
-            <form method="post" action="{{ url('/report/send') }}">
-                <div class="modal-dialog">
-                    <div class="modal-content {{ m.type_bg_class() }}">
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{ __('reporter.report') }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            {{ csrf() }}
-
-                            {% set reasons = {} %}
-                            {% for r in config('reporter_reasons') %}
-                                {% set reasons = reasons|merge({(r): __('reporter.type.' ~ r)}) %}
-                            {% endfor %}
-                            {{ f.select(
-                                'reason',
-                                __('reporter.form.reason'),
-                                reasons,
-                                {'required': true, 'required_icon': true, 'form_text': __('reporter.form.reason.info')},
-                            ) }}
-
-                            {{ f.textarea(
-                                'message',
-                                __('reporter.form.message'),
-                                {'form_text': __('reporter.form.message.info')},
-                            ) }}
-
-                            {{ f.textarea(
-                                'content',
-                                __('reporter.form.content'),
-                                {'disabled': true},
-                            ) }}
-
-
-                            {{ f.checkbox(
-                                'use_content',
-                                __('reporter.form.use_content'),
-                                {'checked': true},
-                            ) }}
-
-
-                            {{ f.form_text({'form_text': __('reporter.form.info')}) }}
-
-                        </div>
-
-                        <div class="modal-footer">
-                            {{ f.submit(__('reporter.report'), {
-                                'icon_left': 'shield-fill-exclamation',
-                                'name': 'report',
-                                'btn_type': 'warning',
-                            }) }}
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+        {% include 'reporter/modal.twig' %}
     {% endif %}
 {% endblock %}

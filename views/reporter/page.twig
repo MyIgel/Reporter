@@ -1,0 +1,36 @@
+{% extends "layouts/app.twig" %}
+{% import 'macros/base.twig' as m %}
+
+{% block title %}{{ __('reporter.report') }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                {{ m.back(url('/')) }}
+                {{ block('title') }}
+            </h1>
+        </div>
+
+        {% include 'layouts/parts/messages.twig' %}
+
+        <div class="row">
+            <div class="col-md-12">
+
+                {% include 'reporter/form.twig' with {'with_content': false, 'message_required': true} %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# For $reasons extending app.twig here omits the plugins app.twig so we need to extend it here too #}
+{% block scripts -%}
+    {{ parent() }}
+    <script src="{{ asset('plugin:Reporter:assets/report.js') }}" defer></script>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    {% include 'reporter/modal.twig' %}
+{% endblock %}

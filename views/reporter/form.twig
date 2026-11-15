@@ -1,0 +1,65 @@
+{% block report %}
+
+    <form method="post" action="{{ url('/report/send') }}">
+        {% block form %}
+
+            {% block form_fields %}
+                {% import 'macros/form.twig' as f %}
+                {# For $reasons the import must be at the same scope where its used #}
+
+                {{ csrf() }}
+
+                {% set reasons = {} %}
+                {% for r in config('reporter_reasons') %}
+                    {% set reasons = reasons|merge({(r): __('reporter.type.' ~ r)}) %}
+                {% endfor %}
+                {{ f.select(
+                    'reason',
+                    __('reporter.form.reason'),
+                    reasons,
+                    {'required': true, 'required_icon': true, 'form_text': __('reporter.form.reason.info')},
+                ) }}
+
+                {{ f.textarea(
+                    'message',
+                    __('reporter.form.message'),
+                    {
+                        'form_text': __('reporter.form.message.info'),
+                        'required': message_required|default(false),
+                        'required_icon': message_required|default(false),
+                    },
+                ) }}
+
+                {% if with_content is not defined or with_content %}
+                    {{ f.textarea(
+                        'content',
+                        __('reporter.form.content'),
+                        {'disabled': true},
+                    ) }}
+
+                    {{ f.checkbox(
+                        'use_content',
+                        __('reporter.form.use_content'),
+                        {'checked': true},
+                    ) }}
+                {% endif %}
+
+                {{ f.form_text({'form_text': __('reporter.form.info')}) }}
+            {% endblock %}
+
+            {% block submit %}
+                {% import 'macros/form.twig' as f %}
+                {# For $reasons the import must be at the same scope where its used #}
+
+                {{ f.submit(__('reporter.report'), {
+                    'icon_left': 'shield-fill-exclamation',
+                    'name': 'report',
+                    'btn_type': 'warning',
+                    'class': 'mt-3',
+                }) }}
+            {% endblock %}
+
+        {% endblock %}
+    </form>
+
+{% endblock %}
