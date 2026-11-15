@@ -6,6 +6,7 @@ use Engelsystem\Config\Config;
 use Engelsystem\Events\DataEvent;
 use Engelsystem\Mail\EngelsystemMailer;
 use Engelsystem\Models\EventConfig;
+use Engelsystem\Models\Shifts\ShiftEntry;
 use Engelsystem\Renderer\Renderer;
 use Psr\Log\LoggerInterface;
 
@@ -68,6 +69,31 @@ class Report
             'report' => $this->renderer->render(
                 'reporter/report.twig',
                 ['report_data' => ['user' => $event->data['user']->id]]
+            ),
+        ];
+    }
+
+    public function shiftPageName(DataEvent $event): void
+    {
+        $entries = [];
+        foreach ($event->data['shift']->shiftEntries as $entry) {
+            /** @var ShiftEntry $entry */
+            $entries[$entry->user->id] = $entry->user->name;
+        }
+        asort($entries);
+
+        $event->data['parts'] = [
+            ...$event->data['parts'],
+            'report' => $this->renderer->render(
+                'reporter/report.twig',
+                ['report_data' => [
+                    'shift' => $event->data['shift']->shiftType->name,
+                    'in' => $event->data['shift']->location->name,
+                    'with' => $entries,
+                    'id' => $event->data['shift']->id,
+                    'start' => $event->data['shift']->start,
+                    'end' => $event->data['shift']->end,
+                ]]
             ),
         ];
     }
