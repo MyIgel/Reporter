@@ -1,0 +1,18 @@
+{% extends 'pages/questions/index.twig' %}
+{% import 'reporter/report.twig' as r %}
+
+{% block question_mod %}
+    {% if question.user.id != user.id %}
+
+        {{ r.report({
+            'question': question.text,
+            'answer': question.answer,
+            'at': question.created_at,
+            'id': question.id,
+            'user': question.user.id,
+        }, {'class': 'me-1'}) }}
+
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

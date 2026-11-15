@@ -1,0 +1,17 @@
+{% extends 'pages/messages/conversation.twig' %}
+{% import 'reporter/report.twig' as r %}
+
+{% block message_mod %}
+    {% if not own_message %}
+
+        {{ r.report({
+            'message': msg.text,
+            'at': msg.created_at,
+            'id': msg.id,
+            'user': msg.user.id,
+        }, {'class': 'ms-2'}) }}
+
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}
